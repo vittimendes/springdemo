@@ -7,15 +7,24 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<context:property-placeholder location="classpath:application.properties"/>
     <!-- Define your beans here -->
-    <bean id="myFortune"
+    <bean id="myFortuneService"
     	class="com.vm.springdemo.HappyFortuneService">
     	</bean>
     
     <bean id="myCoach"
     	class="com.vm.springdemo.TrackCoach">
     	
-    	<constructor-arg ref="myFortune" />    
+    	<constructor-arg ref="myFortuneService" />    
     </bean>
+    
+    <bean id="myCricketCoach"
+    	class="com.vm.springdemo.CricketCoach">
+    	
+    	<property name="fortunesService" ref="myFortuneService" /> 
+    	<property name="emailAddress" value="${foo.email}"/>
+    	<property name="team" value="${foo.team}"></property>
+    	</bean>
     
 </beans>
